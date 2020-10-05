@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <!--SqlSessionFactoryBean-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!--mybatis全局配置文件-->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+        <!--
+        mapper映射文件路径：它属于实现类，所以要存在impl项目下，会在impl项目下创建resources,mybatis/mapper/*.xml
+        main项目扫描时，也会扫描到自己依赖jar包的类路径下
+        -->
+        <property name="mapperLocations" value="classpath*:mybatis/mapper/*.xml"></property>
+    </bean>
+    <!--mapper接口所在的包-->
+    <mybatis:scan base-package="com.atguigu.atcrowdfunding.mapper"></mybatis:scan>
+</beans>
